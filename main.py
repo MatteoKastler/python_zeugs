@@ -4,9 +4,9 @@ def get_lotto():
     lotteryNumbers = []
 
     for i in range(0, 6):
-        number = random.randint(1, 45)
+        number = random.randint(1, 46)
         while number in lotteryNumbers:
-            number = random.randint(1, 45)
+            number = random.randint(1, 46)
         lotteryNumbers.append(number)
 
     return lotteryNumbers
@@ -19,7 +19,7 @@ print(numbers)
 list = [0]*46
 
 for i in range(1000):
-    x = random.randint(1, 45)
+    x = random.randint(1, 46)
     list[x] = list[x]+1
 
-print(list[1:])
+print(list)
