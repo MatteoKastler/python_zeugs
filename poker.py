@@ -17,7 +17,7 @@ def checkHighestPair(cards):
             pairLvl = pairs[i]
             pairIndex = i
     if pairLvl == 4:
-        return 8 #number assoicated with poker
+        return 7 #number associated with poker
     if pairLvl == 3:
         for i in range(len(pairs)):
             if pairs[i] == 2 and i != pairIndex:
@@ -36,7 +36,6 @@ def checkStraights(cards):
     for c in cards:
         cardSymbols.append(c.symbol)
     cardSymbols.sort()
-    print(cardSymbols)
     flush, straight = True, True
     for i in range(len(cardSymbols)-1):
         if(cardSymbols[i]+1 != cardSymbols[i+1]):
@@ -46,8 +45,8 @@ def checkStraights(cards):
     if(flush):
         if(straight):
             if(cardSymbols[-1] == 14):
-                return 10 #royal flush
-            return 9 #straight flush
+                return 9 #royal flush
+            return 8 #straight flush
         return 5 #flush
     return 4 if straight else 0 #straight
 
@@ -67,16 +66,18 @@ class Card:
     def __str__(self):
         return self.color + " " + str(self.symbol)
 
-
+combinations = [0]*10
 for i in range(1):
     cards = []
-    for j in range(4):
+    for j in range(5):
         cards.append(Card())
     for k in range(len(cards)):
         print(str(cards[k]))
         print()
-    print(checkHighestPair(cards))
-    print(checkStraights(cards))
+
+    combinations[max(checkStraights(cards), checkHighestPair(cards))] += 1
+
+    print(max(checkStraights(cards), checkHighestPair(cards)))
 
 
 
