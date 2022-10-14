@@ -68,7 +68,7 @@ class Card:
         return self.color + " " + str(self.symbol)
 
 combinations = [0]*10
-for i in range(100000):
+for i in range(1000000):
     cards = []
     for j in range(5):
         cards.append(Card())
@@ -79,10 +79,10 @@ for i in range(100000):
 
     combinations[max(checkStraights(cards), checkHighestPair(cards))] += 1
 
-    print(max(checkStraights(cards), checkHighestPair(cards)))
+    #print(max(checkStraights(cards), checkHighestPair(cards)))
 
 for i in range(len(combination_str)):
-    print(combination_str[i] + ": " + str(combinations[i]))
+    print(combination_str[i] + ": " + str(combinations[i]/sum(combinations)*100) + "%")
 
 
 
