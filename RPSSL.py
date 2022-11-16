@@ -6,7 +6,7 @@ def getWinner(a, b):
     if(a == b):return 0
     if((a+1)%(len(symbol)) == b): return 1
     if((a+3)%(len(symbol)) == b): return 1
-    return
+    return 2
 
 if __name__ == '__main__':
     player = -1
