@@ -4,7 +4,7 @@ import random
 
 global colors
 colors = ["Herz", "Karo", "Pik", "Blatt"]
-combination_str = ["Highcard", "Pair", "two Pairs", "Triple", "Straight", "Flush", "Poker", "Straight Flush", "Royal Flush"]
+combination_str = ["Highcard", "Pair", "two Pairs", "Triple", "Straight", "Flush","Full house", "Poker", "Straight Flush", "Royal Flush"]
 
 def checkHighestPair(cards):
     pairs = [0]*15
@@ -68,23 +68,19 @@ class Card:
         return self.color + " " + str(self.symbol)
 
 combinations = [0]*10
-for i in range(1000000):
+for i in range(10000000):
     cards = []
     for j in range(5):
         cards.append(Card())
-    for k in range(len(cards)):
-        #print(str(cards[k]))
-        #print()
-        pass
+
 
     combinations[max(checkStraights(cards), checkHighestPair(cards))] += 1
-
-    #print(max(checkStraights(cards), checkHighestPair(cards)))
+    if(max(checkStraights(cards), checkHighestPair(cards))>3):
+        for k in range(len(cards)):
+            #print(str(cards[k]))
+            #print()
+            pass
+        #print(max(checkStraights(cards), checkHighestPair(cards)))
 
 for i in range(len(combination_str)):
     print(combination_str[i] + ": " + str(combinations[i]/sum(combinations)*100) + "%")
-
-
-
-
-
