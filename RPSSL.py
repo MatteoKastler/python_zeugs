@@ -3,6 +3,7 @@ import sqlite3
 import flask
 import requests
 from flask import Flask, request, jsonify
+import json
 
 symbol = ["Rock", "Lizard", "Spock", "Scissors", "Paper"]
 #1 schlägt 2 usw
@@ -41,13 +42,15 @@ if __name__ == '__main__':
     @app.route('/score')
     def score_serve():
         if (request.method == 'GET'):
-            return jsonify({'data': score_data})
+            data = json.dumps(dict(score_data))
+            return data
 
 
     @app.route('/symbols')
     def symbol_serve():
         if (request.method == 'GET'):
-            return jsonify({'data': symbol_data})
+            data = json.dumps(dict(symbol_data))
+            return data
     app.run()
 
     player = -1
