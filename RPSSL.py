@@ -1,5 +1,8 @@
 import random
 import sqlite3
+import flask
+import requests
+from flask import Flask, request, jsonify
 
 symbol = ["Rock", "Lizard", "Spock", "Scissors", "Paper"]
 #1 schlägt 2 usw
@@ -31,7 +34,21 @@ if __name__ == '__main__':
             for i in range(len(symbol)):
                 cursor.execute("INSERT INTO symbols VALUES (?, 0)",(symbol[i],))
                 print(f"symbol {symbol[i]} added to database")
+        score_data = cursor.execute("select * from score").fetchall()
+        symbol_data = cursor.execute("select * from symbols").fetchall()
 
+    app = Flask(__name__)
+    @app.route('/score')
+    def score_serve():
+        if (request.method == 'GET'):
+            return jsonify({'data': score_data})
+
+
+    @app.route('/symbols')
+    def symbol_serve():
+        if (request.method == 'GET'):
+            return jsonify({'data': symbol_data})
+    app.run()
 
     player = -1
     for i in range(len(symbol)):
@@ -47,15 +64,14 @@ if __name__ == '__main__':
     print(f'Computer choice {symbol[comp]}')
     if(result == 1):
         print("You won")
-        q = f"UPDATE score SET score = score+1 WHERE name=\"player\""
-        cursor.execute(q)
+        cursor.execute("UPDATE score SET score = score+1 WHERE name=?",("player",))
     elif(result == 2):
         print("Computer won")
-        q = f"UPDATE score SET score = score+1 WHERE name=\"computer\""
-        cursor.execute(q)
+        cursor.execute("UPDATE score SET score = score+1 WHERE name=?",("computer",))
     else:
         print("Draw")
-        q = f"UPDATE score SET score = score+1 WHERE name=\"draw\""
-        cursor.execute(q)
+        cursor.execute("UPDATE score SET score = score+1 WHERE name=?",("draw",))
+
     cursor.execute("UPDATE symbols SET score = score+1 WHERE symbol=?", (symbol[player],))
     cursor.execute("UPDATE symbols SET score = score+1 WHERE symbol=?", (symbol[comp],))
+
