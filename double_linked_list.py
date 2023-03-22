@@ -35,6 +35,17 @@ class LinkedList:
         self.head.next = None
         del(temp)
 
+    def remove(self, obj):
+        if self.base == None:
+            print("list has no elements")
+            return
+        temp = self.base
+        while temp.data != obj:
+            temp = temp.next
+        temp.prev.next = temp.next
+        temp.next.prev = temp.prev
+        del(temp)
+
     def length(self):
         cnt = 0
         temp = self.base
@@ -48,7 +59,10 @@ if __name__ == '__main__':
         ll.push(0)
         ll.push(1)
         ll.push(2)
-        ll.push(3)
+        ll.push(2)
+        ll.push(4)
+        ll.push(5)
         ll.printList()
-        ll.pop()
+        ll.remove(2)
+        print("\n")
         ll.printList()
