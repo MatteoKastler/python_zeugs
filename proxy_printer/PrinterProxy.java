@@ -24,4 +24,11 @@ public class PrinterProxy implements Printer {
 		printer.scan(email);
 		
 	}
+	public void switchTo(String name) {
+		if(name == "SW") {
+			printer = new SWPrinter();
+		}else if (name == "CO") {
+			printer = new ColorPrinter();
+		}
+	}
 }
